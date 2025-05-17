@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow mx-auto">
+        <div class="card-body p-4">
+            <!-- форма для написания поста -->
+            <form class="mt-1" action="" method="post">
+                {{ form.hidden_tag() }}
+                <h2 class="h4 mb-4 fw-bold text-secondary">Написать пост</h2>
+                {% if redalert %}
+                <div class="alert alert-danger" role="alert">
+                    {{ redalert }}
+                </div>
+                {% endif %}
+
+                <!-- заголовок -->
+                <div class="mb-4 position-relative">
+                    {{ form.header(class="form-control", rows="3", placeholder="Заголовок") }}
+                    {% for error in form.header.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- основной текст -->
+                <div class="mb-4 position-relative">
+                    {{ form.text(class="form-control", rows="3", placeholder="Основной текст") }}
+                    {% for error in form.text.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ form.submit(type="submit", class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

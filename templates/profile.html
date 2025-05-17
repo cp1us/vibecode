@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card profile-card shadow">
+                <div class="card-body p-4">
+                    <!-- никнейм крутой -->
+                    <h1 class="display-6 fw-bold mb-4">{{ user.username }}</h1>
+
+                    <!-- дата регистрации -->
+                    <div class="d-flex align-items-center mb-4">
+                        <span class="badge bg-secondary me-2">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                        <span class="text-muted">
+                            Дата регистрации: {{ user.date.strftime("%d.%m.%Y - %H:%M") }}
+                        </span>
+                    </div>
+
+                    <!-- кол-во постов и комментариев -->
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stat-item bg-secondary text-white text-center rounded ">
+                                <div class="fw-bold">Написанно постов</div>
+                                <div class="h4 mb-0">{{ user.total_posts }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="stat-item bg-secondary text-white text-center rounded ">
+                                <div class="fw-bold">Написанно коментариев</div>
+                                <div class="h4 mb-0">{{ user.total_comments }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- итерация постов (ого какие умные слова знаю) -->
+    <h1 class="display-6 fw-bold mb-3" style="text-align: center;">{{ title }} // Вайбкод</h1>
+    <div class="divider"></div>
+    {% for post in posts %}
+    <div class="post-card" onclick="location.href='post/{{ post.id }}';">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <small class="text-muted">{{ post.date.strftime("%d.%m.%Y - %H:%M") }}</small>
+                    </div>
+                </div>
+                <h2 class="h4 fw-bold mb-3">{{ post.header }}</h2>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <span class="badge bg-secondary me-2">OP:</span>
+                        <a class="text-muted fst-italic" href="/profile/{{ post.op_username }}" target="_blank">
+                            {{post.op_username }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- пагинация постов -->
+    <nav class="navbar justify-content-center" aria-label="Навигация по страницам">
+            <ul class="pagination pagination-sm rounded-pill">
+                {% for page in posts.iter_pages(left_edge=2, left_current=2, right_current=2, right_edge=1) %}
+                {% if page == posts.page %}
+                <li class="page-item active"><span class="page-link">{{ page }}</span></li>
+                {% elif page %}
+                <li class="page-item"><a class="page-link" href="/index?page={{ page }}">{{ page }}</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+
+</div>
+{% endblock %}

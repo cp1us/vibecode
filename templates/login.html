@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-wrapper d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h2 class="mb-3 fw-bold text-primary">Авторизация</h2>
+                    </div>
+
+                    <div class="auth-body">
+                        <form action="" method="post">
+                            {{ form.hidden_tag() }}
+                            <!-- ошибки чайников -->
+                            {% if redalert %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ redalert }}
+                            </div>
+                            {% endif %}
+
+                            <!-- почта -->
+                            <div class="mb-4 position-relative">
+                                {{ form.email(class="form-control form-control-auth", type="email", placeholder="Почта")
+                                }}
+                                {% for error in form.email.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- пароль -->
+                            <div class="mb-4 position-relative">
+                                {{ form.passwd(class="form-control form-control-auth", type="password",
+                                placeholder="Пароль") }}
+                                {% for error in form.passwd.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- запомнить чайника -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    {{ form.remember_me(class="form-check-input", type="checkbox", id="rememberField")
+                                    }}
+                                    <input class="form-check-input" type="checkbox" id="remember">
+                                    {{ form.remember_me.label(class="form-check-label small", for="rememberField") }}
+                                </div>
+                            </div>
+
+                            <!-- ты не войдешь -->
+                            {{ form.submit(type="submit", class="btn btn-primary btn-auth") }}
+
+                            <div class="divider"></div>
+
+                            <!-- Регистрация -->
+                            <div class="auth-links text-center">
+                                <span class="text-muted">Еще нет аккаунта? </span>
+                                <a href="/register" class="fw-semibold">Зарегистрируйся!</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

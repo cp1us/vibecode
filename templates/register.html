@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-wrapper d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h2 class="mb-1 fw-bold text-primary">Регистрация</h2>
+                    </div>
+
+                    <div class="auth-body">
+                        <form action="" method="post">
+                            {{ form.hidden_tag() }}
+                            <!-- ошибки чайников -->
+                            {% if redalert %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ redalert }}
+                            </div>
+                            {% endif %}
+
+                            <!-- ввод крутого никнейма -->
+                            <div class="mb-4 position-relative">
+                                {{ form.username(class="form-control form-control-auth", type="text",
+                                placeholder="Никнейм") }}
+                                {% for error in form.username.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- почта -->
+                            <div class="mb-4 position-relative">
+                                {{ form.email(class="form-control form-control-auth", type="email", placeholder="Почта")
+                                }}
+                                {% for error in form.email.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- пароль -->
+                            <div class="mb-4 position-relative">
+                                {{ form.passwd(class="form-control form-control-auth", type="password",
+                                placeholder="Пароль") }}
+                                {% for error in form.passwd.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- пароль не опять а снова -->
+                            <div class="mb-4 position-relative">
+                                {{ form.passwd_repeat(class="form-control form-control-auth", type="password",
+                                placeholder="Повтор пароля") }}
+                                {% for error in form.passwd_repeat.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                {% endfor %}
+                                <div class="password-rules mt-2">
+                                    <ul class="mb-0">
+                                        <li>От 8 до 16 символов</li>
+                                        <li>Латинские буквы, цифры и символ _</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <!-- заветная кнопа зарегестрироваться -->
+                            {{ form.submit(type="submit", class="btn btn-primary btn-auth") }}
+
+                            <div class="divider"></div>
+
+                            <!-- Регистрация -->
+                            <div class="auth-links text-center">
+                                <span class="text-muted">Уже имеется аккаунт? </span>
+                                <a href="/login" class="fw-semibold">Авторизируйся!</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
